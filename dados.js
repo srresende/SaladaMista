@@ -35,6 +35,11 @@ const siteData = [
         noticias: [
             {
                 data: "18 Fev 2026",
+                titulo: "Adventure Trip",
+                resumo: "O rack de teto e o novo toldo chegaram. Instalação marcada para sábado.",
+                imagem: "L200_Snow.png"
+            },{
+                data: "18 Fev 2026",
                 titulo: "Upgrade na L200",
                 resumo: "O rack de teto e o novo toldo chegaram. Instalação marcada para sábado.",
                 imagem: "https://placehold.co/150x150/f8b24f/ffffff?text=L200"
