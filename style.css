@@ -1,0 +1,155 @@
+:root {
+    /* Paleta de Frutas */
+    --melancia: #ff6b6b;
+    --limao: #cbf078;
+    --laranja: #f8b24f;
+    --uva: #a29bfe;
+    --fundo: #fffdf9;
+    --texto: #2d3436;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(135deg, var(--melancia), var(--laranja));
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    border-bottom: 5px solid var(--limao);
+}
+
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    background: white;
+    color: var(--texto);
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+nav a:hover {
+    transform: translateY(-3px);
+    background: var(--limao);
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Estilo das Seções */
+section {
+    background: white;
+    margin-bottom: 3rem;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-top: 5px solid var(--uva); /* Cor padrão, muda via JS */
+}
+
+h2 {
+    font-family: 'Fredoka', sans-serif;
+    color: var(--melancia);
+    font-size: 2rem;
+    border-bottom: 2px dashed #eee;
+    padding-bottom: 10px;
+}
+
+.grid-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .grid-conteudo {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 15px;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--laranja);
+}
+
+/* Lista de Notícias */
+ul.lista-noticias {
+    list-style: none;
+    padding: 0;
+}
+
+ul.lista-noticias li {
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--limao);
+    padding-left: 10px;
+}
+
+.data {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: bold;
+}
+
+/* Lista de Links */
+.lista-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-link {
+    display: block;
+    background: var(--uva);
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-link:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--limao);
+    color: var(--texto);
+    font-weight: bold;
+}
