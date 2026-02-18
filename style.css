@@ -1,199 +1,189 @@
 :root {
-    /* Paleta Salada de Frutas */
-    --cor-melancia: #ff6b6b;
-    --cor-limao: #cbf078;
-    --cor-banana: #f8e71c;
-    --cor-laranja: #f8b24f;
-    --cor-uva: #a29bfe;
-    --cor-texto: #2d3436;
-    --cor-fundo: #fffdf9;
-    --sombra: 0 10px 20px rgba(0,0,0,0.08);
-}
-
-* {
-    box-sizing: border-box;
+    --melancia: #ff6b6b;
+    --limao: #cbf078;
+    --banana: #f8e71c;
+    --laranja: #f8b24f;
+    --uva: #a29bfe;
+    --fundo: #fffdf9;
+    --texto: #2d3436;
+    --branco: #ffffff;
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
-    background-color: var(--cor-fundo);
-    background-image: radial-gradient(#ffeaa7 1px, transparent 1px);
-    background-size: 20px 20px; /* Efeito sutil de pontilhados */
-    color: var(--cor-texto);
+    font-family: 'Nunito', sans-serif; /* Sugestão: Importe no HTML */
+    background-color: var(--fundo);
+    color: var(--texto);
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-    background: linear-gradient(135deg, var(--cor-melancia), var(--cor-laranja));
-    padding: 2rem 1rem;
+    /* background: linear-gradient(135deg, var(--melancia), var(--laranja)); */
+    
+    /* O SEGREDO: Uma camada de cor transparente (rgba) em cima da imagem (url) */
+    background-image: 
+        linear-gradient(135deg, rgba(255, 107, 107, 0.85), rgba(248, 178, 79, 0.85)), /* Cores Melancia e Laranja transparentes */
+        /* url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=1000&auto=format&fit=crop'); /* Link da imagem */
+        url('fundo-frutas.png'); /* Link da imagem fundo-frutas.png*/
+    
+    background-size: cover; /* Faz a imagem cobrir tudo sem esticar */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não deixa repetir */
+    
+    padding: 1.5rem;
+    /* padding: 3rem 1.5rem; /* Aumentei um pouco o espaço para aparecer mais a imagem */
     text-align: center;
-    color: white;
-    border-bottom: 5px solid var(--cor-limao);
-    box-shadow: var(--sombra);
+    color: var(--branco);
+    border-bottom: 5px solid var(--limao);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 h1 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 3.5rem;
+    font-family: 'Fredoka', sans-serif; /* Sugestão: Importe no HTML */
+    font-size: 2.5rem;
     margin: 0;
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+/* Menu de Navegação */
+nav {
+    margin-top: 1rem;
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem;
+    border-radius: 50px;
+    display: inline-block;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin-top: 1.5rem;
+    margin: 0;
     display: flex;
-    justify-content: center;
+    gap: 10px;
     flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: center;
 }
 
 nav a {
     text-decoration: none;
-    background: white;
-    color: var(--cor-texto);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
+    color: var(--branco);
     font-weight: bold;
-    font-family: 'Fredoka', sans-serif;
-    transition: transform 0.2s, background 0.2s;
-    border: 2px solid transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background 0.3s;
 }
 
-nav a:hover {
-    transform: translateY(-5px);
-    background: var(--cor-banana);
-    border-color: var(--cor-laranja);
+nav a:hover, nav a.ativo {
+    background: var(--branco);
+    color: var(--melancia);
 }
 
-/* Main Container */
+/* Conteúdo Principal */
 main {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-/* Seções Temáticas */
+/* Seções (Cards) */
 section {
-    background: white;
-    margin-bottom: 4rem;
-    border-radius: 20px;
+    background: var(--branco);
+    border-radius: 15px;
+    margin-bottom: 2rem;
     overflow: hidden;
-    box-shadow: var(--sombra);
-    animation: fadeIn 0.8s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-top: 5px solid var(--uva); /* Cor padrão, muda via JS */
 }
 
 .section-header {
-    padding: 1.5rem;
-    color: white;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .section-header h2 {
-    font-family: 'Fredoka', sans-serif;
     margin: 0;
-    font-size: 2rem;
+    color: var(--branco);
+    font-family: 'Fredoka', sans-serif;
 }
 
-.section-content {
+.section-body {
     padding: 2rem;
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Notícias ocupam mais espaço que Links */
+    grid-template-columns: 2fr 1fr; /* Notícias maior que Links */
     gap: 2rem;
 }
 
 @media (max-width: 768px) {
-    .section-content {
-        grid-template-columns: 1fr; /* Coluna única no celular */
+    .section-body {
+        grid-template-columns: 1fr;
     }
 }
 
-/* Área de Notícias */
-.news-container h3, .links-container h3 {
-    color: var(--cor-texto);
-    border-bottom: 3px dotted var(--cor-limao);
-    padding-bottom: 10px;
-    margin-top: 0;
+/* Componentes Internos */
+h3 {
+    color: var(--laranja);
+    border-bottom: 2px dashed var(--limao);
+    padding-bottom: 5px;
 }
 
+/* Lista de Notícias */
 .news-item {
     display: flex;
     gap: 15px;
     margin-bottom: 1.5rem;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 12px;
-    transition: background 0.2s;
-}
-
-.news-item:hover {
-    background: #fff0f0;
+    background: #fdfdfd;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
 
 .news-img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
-    border-radius: 10px;
-    background-color: #eee;
+    border-radius: 8px;
+    background: #eee;
 }
 
-.news-text small {
+.news-content small {
     color: #888;
+    font-size: 0.8rem;
     font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.75rem;
 }
 
-.news-text h4 {
+.news-content h4 {
     margin: 5px 0;
-    color: var(--cor-melancia);
+    color: var(--texto);
 }
 
-/* Área de Links */
-.links-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
+/* Lista de Links */
 .link-btn {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    background: #fff;
-    border: 2px solid #eee;
-    border-radius: 10px;
+    display: block;
+    background: var(--uva); /* Cor padrão */
+    color: var(--branco);
     text-decoration: none;
-    color: var(--cor-texto);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
     font-weight: bold;
-    transition: 0.2s;
+    text-align: center;
+    transition: transform 0.2s;
 }
 
 .link-btn:hover {
-    border-color: var(--cor-limao);
-    background: var(--cor-fundo);
-    transform: translateX(5px);
+    transform: scale(1.02);
+    opacity: 0.9;
 }
 
 footer {
     text-align: center;
-    padding: 3rem;
-    background: var(--cor-texto);
-    color: white;
-}
-
-.fruit-icons {
-    font-size: 2rem;
-    margin: 10px 0;
+    padding: 2rem;
+    background: var(--limao);
+    color: var(--texto);
+    font-weight: bold;
+    margin-top: 3rem;
 }

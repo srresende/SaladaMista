@@ -1,85 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const app = document.getElementById('app');
+    const mainContainer = document.getElementById('main-content');
 
-    // Limpa o conteúdo de carregamento
-    app.innerHTML = '';
-
-    // Verifica se os dados foram carregados
-    if (typeof siteData === 'undefined') {
-        app.innerHTML = '<p style="text-align:center; color:red;">Erro: O arquivo dados.js não foi encontrado!</p>';
+    // Verifica se o arquivo de dados foi carregado
+    if (typeof conteudoPagina === 'undefined' || !conteudoPagina) {
+        mainContainer.innerHTML = '<p style="text-align:center; padding:20px;">⚠️ Erro: Dados não encontrados. Verifique se o arquivo .js correto está vinculado.</p>';
         return;
     }
 
-    // Loop principal: Cria uma seção para cada item do array de dados
-    siteData.forEach(tema => {
+    // Limpa o container (loading...)
+    mainContainer.innerHTML = '';
+
+    // Itera sobre cada seção de dados (pode ser 1 ou várias)
+    conteudoPagina.forEach(tema => {
         
-        // 1. Cria o elemento da seção
+        // Cria a Seção Principal
         const section = document.createElement('section');
-        section.id = tema.id;
-        
-        // 2. Cria o cabeçalho da seção (Barra colorida)
-        const headerDiv = document.createElement('div');
-        headerDiv.className = 'section-header';
-        headerDiv.style.backgroundColor = tema.corTema;
-        headerDiv.innerHTML = `<h2>${tema.icone} ${tema.titulo}</h2>`;
-        
-        // 3. Cria o container de conteúdo
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'section-content';
+        section.style.borderTopColor = tema.corTema;
 
-        // --- SUB-SEÇÃO: NOTÍCIAS ---
-        const newsDiv = document.createElement('div');
-        newsDiv.className = 'news-container';
-        newsDiv.innerHTML = `<h3>📰 Últimas Notícias</h3>`;
+        // Cabeçalho da Seção (Barra Colorida)
+        const header = document.createElement('div');
+        header.className = 'section-header';
+        header.style.backgroundColor = tema.corTema;
+        header.innerHTML = `<h2>${tema.icone} ${tema.titulo}</h2>`;
 
-        // Gera o HTML de cada notícia
-        if(tema.noticias && tema.noticias.length > 0) {
-            tema.noticias.forEach(noticia => {
+        // Corpo da Seção (Grid)
+        const body = document.createElement('div');
+        body.className = 'section-body';
+
+        // --- Coluna de Notícias ---
+        const newsCol = document.createElement('div');
+        newsCol.innerHTML = '<h3>📰 Últimas Notícias</h3>';
+        
+        if (tema.noticias && tema.noticias.length > 0) {
+            tema.noticias.forEach(news => {
                 const newsItem = document.createElement('div');
                 newsItem.className = 'news-item';
                 newsItem.innerHTML = `
-                    <img src="${noticia.imagem}" alt="${noticia.titulo}" class="news-img">
-                    <div class="news-text">
-                        <small>${noticia.data}</small>
-                        <h4>${noticia.titulo}</h4>
-                        <p>${noticia.resumo}</p>
+                    <img src="${news.imagem}" alt="Imagem notícia" class="news-img">
+                    <div class="news-content">
+                        <small>📅 ${news.data}</small>
+                        <h4>${news.titulo}</h4>
+                        <p>${news.resumo}</p>
                     </div>
                 `;
-                newsDiv.appendChild(newsItem);
+                newsCol.appendChild(newsItem);
             });
         } else {
-            newsDiv.innerHTML += '<p>Nenhuma notícia recente.</p>';
+            newsCol.innerHTML += '<p>Sem notícias recentes.</p>';
         }
 
-        // --- SUB-SEÇÃO: LINKS ---
-        const linksDiv = document.createElement('div');
-        linksDiv.className = 'links-container';
-        linksDiv.innerHTML = `<h3>🔗 Links Importantes</h3>`;
-        
-        const linksList = document.createElement('div');
-        linksList.className = 'links-list';
+        // --- Coluna de Links ---
+        const linksCol = document.createElement('div');
+        linksCol.innerHTML = '<h3>🔗 Links Importantes</h3>';
 
-        // Gera os botões de links
-        if(tema.links && tema.links.length > 0) {
+        if (tema.links && tema.links.length > 0) {
             tema.links.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link.url;
-                a.className = 'link-btn';
-                a.target = '_blank'; // Abre em nova aba
-                a.innerHTML = `<span>📍 ${link.nome}</span>`;
-                linksList.appendChild(a);
+                const btn = document.createElement('a');
+                btn.href = link.url;
+                btn.className = 'link-btn';
+                btn.target = '_blank';
+                btn.textContent = link.nome;
+                btn.style.backgroundColor = tema.corTema; // Botão na cor do tema
+                linksCol.appendChild(btn);
             });
+        } else {
+            linksCol.innerHTML += '<p>Sem links cadastrados.</p>';
         }
-        linksDiv.appendChild(linksList);
 
-        // 4. Monta a estrutura final
-        contentDiv.appendChild(newsDiv);
-        contentDiv.appendChild(linksDiv);
-        
-        section.appendChild(headerDiv);
-        section.appendChild(contentDiv);
-
-        // Adiciona ao site principal
-        app.appendChild(section);
+        // Montagem final
+        body.appendChild(newsCol);
+        body.appendChild(linksCol);
+        section.appendChild(header);
+        section.appendChild(body);
+        mainContainer.appendChild(section);
     });
 });
